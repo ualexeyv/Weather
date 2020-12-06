@@ -17,6 +17,10 @@ class LoginFormController: UIViewController {
             // Присваиваем его UIScrollVIew
             scrollView?.addGestureRecognizer(hideKeyboardGesture)
     }
+   
+    let login = "admin"
+  
+    let password = "12345"
     
     @IBOutlet var scrollView: UIScrollView!
     
@@ -25,19 +29,8 @@ class LoginFormController: UIViewController {
     @IBOutlet var passwordInput: UITextField!
     
     @IBAction func buttonPressed(_ sender: Any) {
-            // Получаем текст логина
-            let login = loginInput.text!
-            // Получаем текст-пароль
-            let password = passwordInput.text!
             
-            // Проверяем, верны ли они
-            if login == "admin" && password == "123456" {
-                print("успешная авторизация")
-            } else {
-                print("неуспешная авторизация")
-            }
-        }
-
+    }
     // Когда клавиатура появляется
     @objc func keyboardWasShown(notification: Notification) {
         
@@ -75,5 +68,26 @@ class LoginFormController: UIViewController {
             self.scrollView?.endEditing(true)
         }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "checkIdentity" {
+            if checkInput() {
+                return true
+            } else {
+                let alert = UIAlertController (title: "Ошибка",
+                                               message: "вы ввели не правильные логин и пароль",
+                                               preferredStyle: .alert)
+                let action = UIAlertAction (title: "OK", style: .default) { (action) in
+                    self.loginInput.text = ""
+                    self.passwordInput.text = ""
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        return true
+    }
     
+    private func checkInput () -> Bool {
+        return loginInput.text == login && passwordInput.text == password
+    }
 }
