@@ -59,15 +59,15 @@ class LoginFormController: UIViewController {
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         }
     override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            
-            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        }
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     @objc func hideKeyboard() {
-            self.scrollView?.endEditing(true)
-        }
-    
+        self.scrollView?.endEditing(true)
+    }
+    /*
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "checkIdentity" {
             if checkInput() {
@@ -89,5 +89,27 @@ class LoginFormController: UIViewController {
     
     private func checkInput () -> Bool {
         return loginInput.text == login && passwordInput.text == password
+    } */
+    
+    private func checkLogAndPass() -> Bool {
+        return loginInput.text == login && passwordInput.text == password
+    }
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "checkIdentity" {
+            if checkLogAndPass() {
+                return true
+            } else {
+                let alert = UIAlertController (title: "Ошибка!",
+                                               message: "Вы ввели не верный логин и пароль",
+                                               preferredStyle: .alert)
+                let action = UIAlertAction (title: "OK", style: .default) { (action) in
+                    self.loginInput.text = ""
+                    self.passwordInput.text = ""
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        return true
     }
 }

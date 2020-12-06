@@ -79,8 +79,8 @@
                                     <constraint firstItem="WTr-Ru-88C" firstAttribute="top" secondItem="oqZ-Vf-riK" secondAttribute="top" constant="35" id="faZ-v1-z5j"/>
                                     <constraint firstItem="oqZ-Vf-riK" firstAttribute="trailing" secondItem="BEy-DB-v7l" secondAttribute="trailing" constant="20" id="fwK-6V-adl"/>
                                     <constraint firstItem="3Cz-ZZ-TOX" firstAttribute="top" secondItem="WTr-Ru-88C" secondAttribute="bottom" constant="40" id="kUw-ma-l0b"/>
-                                    <constraint firstAttribute="trailing" secondItem="WTr-Ru-88C" secondAttribute="trailing" constant="20" id="piU-Q7-Vdk"/>
                                     <constraint firstItem="BEy-DB-v7l" firstAttribute="leading" secondItem="oqZ-Vf-riK" secondAttribute="leading" constant="20" id="vpj-yk-NHc"/>
+                                    <constraint firstAttribute="trailing" secondItem="WTr-Ru-88C" secondAttribute="trailing" constant="20" id="x7T-07-5Yg"/>
                                     <constraint firstItem="KpR-Yy-P9a" firstAttribute="leading" secondItem="oqZ-Vf-riK" secondAttribute="leading" constant="20" id="z9c-yO-gaR"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="ucj-0D-aCV"/>
@@ -240,6 +240,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="S7n-B5-GGO" kind="show" trigger="accessoryAction" id="LZZ-vE-jAU"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -282,6 +285,7 @@
                             <outlet property="delegate" destination="S7n-B5-GGO" id="4MI-xH-fZ0"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="3bA-7F-PQY"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XDC-z0-qDr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
