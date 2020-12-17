@@ -15,6 +15,8 @@ class LoginFormController: UIViewController, UITextFieldDelegate, UIScrollViewDe
         scrollView?.addGestureRecognizer(keyBoardGesture)
         assignbackground()
     }
+    
+    
     func assignbackground(){
             let background = UIImage(named: "background")
 
@@ -38,6 +40,10 @@ class LoginFormController: UIViewController, UITextFieldDelegate, UIScrollViewDe
     }
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var activeTextField: UITextField?
+    
+    
+    
     @objc func keyBoardWasShown (notification: Notification) {
         let info = notification.userInfo! as NSDictionary
         let kbSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
@@ -51,7 +57,7 @@ class LoginFormController: UIViewController, UITextFieldDelegate, UIScrollViewDe
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyBoardWasShown), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyBoardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyBoardWillBeHidden), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
    
