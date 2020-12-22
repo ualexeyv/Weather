@@ -28,19 +28,20 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         groupTable.delegate = self
         groupTable.dataSource = self
-
+        groupTable.register(UINib(nibName: "cellConfig", bundle: nil), forCellReuseIdentifier: "cell")
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return massOfGroups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell") as! GroupCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ReusableCell
         let index = indexPath.row
         let name = massOfGroups[index].name
         let desc = massOfGroups[index].desc
         let image = massOfGroups[index].icon
-        cell.setGroupData(name: name, desc: desc, icon: image)
+        cell.setData(name: name, surname: desc, friendAvatar: image)
+        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat

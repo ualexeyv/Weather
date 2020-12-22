@@ -7,16 +7,19 @@
 
 import UIKit
 
-class FriendsViewCell: UITableViewCell {
+class ReusableCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var surnameLabel: UILabel!
-    @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var avatrImg: UIImageView!
+    @IBOutlet weak var descLabel: UILabel!
+   
+    
     
     func setData (name: String, surname: String, friendAvatar: UIImage) {
         nameLabel.text = name
-        surnameLabel.text = surname
-        avatar.image = friendAvatar
+        descLabel.text = surname
+        avatrImg.image = friendAvatar
+        
     }
 
 }

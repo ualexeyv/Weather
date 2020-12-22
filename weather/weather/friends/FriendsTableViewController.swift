@@ -27,14 +27,14 @@ class FriendsTableViewController: UIViewController, UITableViewDataSource, UITab
         
         FriendsTableView.delegate = self
         FriendsTableView.dataSource = self
-
+        FriendsTableView.register(UINib(nibName: "cellConfig", bundle: nil), forCellReuseIdentifier: "cell")
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return massOfFriends.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ReusableCell
         let index = indexPath.row
         let name = massOfFriends[index].name
         let surname = massOfFriends[index].surname
