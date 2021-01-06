@@ -8,25 +8,25 @@
 import UIKit
 
 class PhotoViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    
-    @IBOutlet weak var photoCollection: UICollectionView!
     var photoArray = [UIImage]()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
+    @IBOutlet weak var photoCollection: UICollectionView!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoArray.count
+        
+       return photoArray.count
     }
+   
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionCell
-        cell.photoOfFriends.image = photoArray[indexPath.row]
+        let img = photoArray[indexPath.row]
+        cell.SetPhotoData(img: img)
         
         return cell
     }
     
+ //   override func viewDidLoad() {
+ //       super.viewDidLoad()
+
     
 }

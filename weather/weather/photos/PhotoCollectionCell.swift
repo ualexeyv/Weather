@@ -8,6 +8,10 @@
 import UIKit
 
 class PhotoCollectionCell: UICollectionViewCell {
-    @IBOutlet weak var photoOfFriends: UIImageView!
     
+    @IBOutlet weak var friendPhoto: UIImageView!
+    
+    func SetPhotoData (img: UIImage) {
+        friendPhoto.image = img
+    }
 }

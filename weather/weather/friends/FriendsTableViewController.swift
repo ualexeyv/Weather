@@ -13,11 +13,18 @@ struct Friends {
     var photos = [UIImage] ()
    
 }
-let firstFriend = Friends (name: "Alex", surname: "Ivanov", avatar: UIImage(named: "friend1")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!])
-let secondFriend = Friends (name: "Max", surname:  "Visario", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!])
-let thirdFriend = Friends (name: "Igor", surname:  "Mironov", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!])
-let massOfFriends = [firstFriend, secondFriend, thirdFriend]
-class FriendsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+var structOfFriend : [Friends] = [
+    Friends(name: "Максим", surname: "Иванов", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!]),
+    Friends (name: "Андрей", surname: "Самойлов", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
+    Friends (name: "Антон", surname:  "Заболотный", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
+    Friends (name: "Алексей", surname:  "Миранчук", avatar: UIImage(named: "miranchuk")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
+    Friends (name: "Диньяр", surname:  "Билялетдинов", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
+    Friends (name: "Кирилл", surname:  "Набабакин", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
+    Friends (name: "Василий", surname:  "Березуцкий", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
+    Friends (name: "Роман", surname:  "Широков", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
+    Friends (name: "Григорий", surname:  "Джикия", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!])]
+
+class FriendsTableViewController: UIViewController {
     
     
 
@@ -29,30 +36,57 @@ class FriendsTableViewController: UIViewController, UITableViewDataSource, UITab
         FriendsTableView.dataSource = self
         FriendsTableView.register(UINib(nibName: "cellConfig", bundle: nil), forCellReuseIdentifier: "cell")
     }
+    
+    let key:[String] = []
+    
+    
+  /*  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPhoto" {
+            guard let dest = segue.destination as? PhotoViewController else { return }
+            if let index = FriendsTableView.indexPathForSelectedRow {
+                let friend = structOfFriend[index.row]
+                dest.photoArray.append(contentsOf: friend.photos)
+            }
+        }
+    } */
+}
+extension FriendsTableViewController: UITableViewDataSource, UITableViewDelegate {
+  //  func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        
+ //   }
+    
+ //   func numberOfSections(in tableView: UITableView) -> Int {
+        
+ //   }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return massOfFriends.count
+        return structOfFriend.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ReusableCell
         let index = indexPath.row
-        let name = massOfFriends[index].name
-        let surname = massOfFriends[index].surname
-        let userAvatar = massOfFriends[index].avatar
+        let name = structOfFriend[index].name
+        let surname = structOfFriend[index].surname
+        let userAvatar = structOfFriend[index].avatar
         cell.setData(name: name, surname: surname, friendAvatar: userAvatar)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(identifier: "PhotoVC") as! PhotoViewController
+        let friend = structOfFriend [indexPath.row]
+        for i in friend.photos {
+            VC.photoArray.append (i)
+            print (friend.photos.count)
+        }
+        show(VC, sender: nil)
+        
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 70
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showPhoto" {
-            guard let dest = segue.destination as? PhotoViewController else { return }
-            if let index = FriendsTableView.indexPathForSelectedRow {
-                let friend = massOfFriends[index.row]
-                dest.photoArray.append(contentsOf: friend.photos)
-            }
-        }
+        return 100
     }
 }

@@ -14,9 +14,10 @@
             <rect key="frame" x="0.0" y="0.0" width="543" height="114"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xQm-u5-YXf" customClass="CustomView" customModule="weather" customModuleProvider="target">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xQm-u5-YXf" customClass="CustomView" customModule="weather" customModuleProvider="target">
                     <rect key="frame" x="5" y="5" width="80" height="80"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="80" id="2QF-Ko-TId"/>
                         <constraint firstAttribute="width" constant="80" id="mOc-g8-j0V"/>
                     </constraints>
                 </imageView>
@@ -42,8 +43,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="xQm-u5-YXf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="1MH-Aw-LPe"/>
-                <constraint firstItem="xQm-u5-YXf" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="5" id="4j0-FJ-Nuv"/>
+                <constraint firstItem="xQm-u5-YXf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="CAN-yp-5Si"/>
                 <constraint firstItem="t2G-A7-n0e" firstAttribute="leading" secondItem="xQm-u5-YXf" secondAttribute="trailing" constant="10" id="JCx-Yd-RJo"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="msv-lI-R4T" secondAttribute="trailing" constant="5" id="VhY-4z-sKd"/>
                 <constraint firstItem="msv-lI-R4T" firstAttribute="leading" secondItem="xQm-u5-YXf" secondAttribute="trailing" constant="10" id="los-l5-E33"/>
