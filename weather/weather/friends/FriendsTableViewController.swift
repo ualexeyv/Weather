@@ -35,40 +35,46 @@ class FriendsTableViewController: UIViewController {
         FriendsTableView.delegate = self
         FriendsTableView.dataSource = self
         FriendsTableView.register(UINib(nibName: "cellConfig", bundle: nil), forCellReuseIdentifier: "cell")
+        for i in structOfFriend {
+            let firstLetter = String(i.name.first!)
+            if sections[firstLetter] != nil {
+                sections[firstLetter]!.append(i)
+            } else {
+                sections[firstLetter] = [i]
+            }
+            keys = Array(sections.keys).sorted(by: <)
+        }
     }
     
-    let key:[String] = []
-    
-    
-  /*  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showPhoto" {
-            guard let dest = segue.destination as? PhotoViewController else { return }
-            if let index = FriendsTableView.indexPathForSelectedRow {
-                let friend = structOfFriend[index.row]
-                dest.photoArray.append(contentsOf: friend.photos)
-            }
-        }
-    } */
+    var keys:[String] = []
+    var sections:[String: [Friends]] = [:]
+  
 }
 extension FriendsTableViewController: UITableViewDataSource, UITableViewDelegate {
-  //  func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        
- //   }
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        keys
+    }
     
- //   func numberOfSections(in tableView: UITableView) -> Int {
-        
- //   }
-    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return keys[section]
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return structOfFriend.count
+        let key = keys[section]
+        let count = sections[key]!.count
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ReusableCell
-        let index = indexPath.row
-        let name = structOfFriend[index].name
-        let surname = structOfFriend[index].surname
-        let userAvatar = structOfFriend[index].avatar
+        let key = keys[indexPath.section]
+        let contact = sections[key]![indexPath.row]
+       
+        let name = contact.name
+        let surname = contact.surname
+        let userAvatar = contact.avatar
         cell.setData(name: name, surname: surname, friendAvatar: userAvatar)
         return cell
     }
