@@ -20,7 +20,7 @@ var structOfFriend : [Friends] = [
     Friends (name: "Алексей", surname:  "Миранчук", avatar: UIImage(named: "miranchuk")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
     Friends (name: "Диньяр", surname:  "Билялетдинов", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
     Friends (name: "Кирилл", surname:  "Набабакин", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
-    Friends (name: "Василий", surname:  "Березуцкий", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
+    Friends (name: "Василий", surname:  "Березуцкий", avatar: UIImage(named: "berez2")!, photos: [UIImage(named: "berez1")!, UIImage(named: "berez2")!, UIImage(named: "berez3")!]),
     Friends (name: "Роман", surname:  "Широков", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
     Friends (name: "Григорий", surname:  "Джикия", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!])]
 
@@ -75,18 +75,17 @@ extension FriendsTableViewController: UITableViewDataSource, UITableViewDelegate
         let name = contact.name
         let surname = contact.surname
         let userAvatar = contact.avatar
-        cell.setData(name: name, surname: surname, friendAvatar: userAvatar)
+        cell.setData(name: name, surname: surname)
+        cell.setAvatar(userAvatar)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(identifier: "PhotoVC") as! PhotoViewController
-        let friend = structOfFriend [indexPath.row]
-        for i in friend.photos {
-            VC.photoArray.append (i)
-            print (friend.photos.count)
-        }
+        let key = keys[indexPath.section]
+        let friend = sections[key]![indexPath.row]
+        VC.photoArray = friend.photos
         show(VC, sender: nil)
         
     }

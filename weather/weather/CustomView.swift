@@ -7,25 +7,27 @@
 
 import UIKit
 
-class CustomView: UIImageView {
+class CustomView: UIView {
     
-    //    var image: UIImageView? = nil
+        var image: UIImageView? = nil
         
-  //      func setImg (_ image: UIImage) {
-  //          self.image = UIImageView (frame: self.bounds)
-  //          self.image?.image = image
-  //          self.addSubview(self.image!)
- //       }
+        func setImg (_ image: UIImage) {
+            self.image = UIImageView (frame: self.bounds)
+            self.image?.image = image
+            self.image?.layer.cornerRadius = self.frame.size.height/2
+            self.image?.layer.masksToBounds = true
+            self.backgroundColor = .clear
+            self.addSubview(self.image!)
+        }
     
     override func draw(_ rect: CGRect) {
         
         
-   //     layer.shadowColor = UIColor.blue.cgColor
-   //     layer.shadowOffset = .zero
-   //     layer.shadowRadius = 12
-     //   layer.shadowOpacity = 1.0
-     //   layer.cornerRadius = self.frame.size.height/2
-     //   layer.masksToBounds = true
+        layer.shadowColor = UIColor.green.cgColor
+        layer.shadowOffset = .zero
+        layer.shadowRadius = 12
+        layer.shadowOpacity = 1.0
+        
         
     }
     

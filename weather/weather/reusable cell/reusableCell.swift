@@ -10,15 +10,17 @@ import UIKit
 class ReusableCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var avatrImg: UIImageView!
     @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var cView: CustomView!
     
-    func setData (name: String, surname: String, friendAvatar: UIImage) {
+    func setData (name: String, surname: String) {
         nameLabel.text = name
         descLabel.text = surname
-        avatrImg.image = friendAvatar
-        avatrImg.layer.cornerRadius = self.frame.size.height/2
-        avatrImg.layer.masksToBounds = true
+        
+    }
+    func setAvatar (_ img: UIImage) {
+        cView.setImg(img)
+        
         
     }
     override func draw(_ rect: CGRect) {

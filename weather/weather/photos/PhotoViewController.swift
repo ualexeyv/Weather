@@ -11,6 +11,9 @@ class PhotoViewController: UIViewController, UICollectionViewDataSource, UIColle
     var photoArray = [UIImage]()
     @IBOutlet weak var photoCollection: UICollectionView!
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
        return photoArray.count
@@ -25,8 +28,11 @@ class PhotoViewController: UIViewController, UICollectionViewDataSource, UIColle
         return cell
     }
     
- //   override func viewDidLoad() {
- //       super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        photoCollection.delegate = self
+        photoCollection.dataSource = self
+    }
 
     
 }

@@ -40,8 +40,8 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         let name = massOfGroups[index].name
         let desc = massOfGroups[index].desc
         let image = massOfGroups[index].icon
-        cell.setData(name: name, surname: desc, friendAvatar: image)
-        
+        cell.setData(name: name, surname: desc)
+        cell.setAvatar(image)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
