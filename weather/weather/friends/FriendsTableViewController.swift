@@ -26,16 +26,36 @@ var structOfFriend : [Friends] = [
 
 class FriendsTableViewController: UIViewController {
     
-    
-
+    let searchController = UISearchController (searchResultsController: nil)
+    var filteredFriends: [Friends] = []
+    var isSearchBarEmpty: Bool { return searchController.searchBar.text?.isEmpty ?? true}
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
+    var keys:[String] = []
+    var sections:[String: [Friends]] = [:]
+    func filtereContentForSearchText (_ searchText: String) {
+        filteredFriends = structOfFriend.filter { (friend: Friends) -> Bool in
+            return friend.name.lowercased().contains(searchText.lowercased())
+        }
+        FriendsTableView.reloadData()
+    }
     @IBOutlet weak var FriendsTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // нужно добавить сортировку отфильтрованного массива
         FriendsTableView.delegate = self
         FriendsTableView.dataSource = self
         FriendsTableView.register(UINib(nibName: "cellConfig", bundle: nil), forCellReuseIdentifier: "cell")
-        for i in structOfFriend {
+        
+        var arrayOfFriends: [Friends] = []
+        if isFiltering {
+            arrayOfFriends.append(contentsOf: filteredFriends)
+            print (filteredFriends.count)
+        } else {
+            arrayOfFriends.append(contentsOf: structOfFriend)
+        }
+        for i in arrayOfFriends {
             let firstLetter = String(i.name.first!)
             if sections[firstLetter] != nil {
                 sections[firstLetter]!.append(i)
@@ -44,15 +64,16 @@ class FriendsTableViewController: UIViewController {
             }
             keys = Array(sections.keys).sorted(by: <)
         }
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
-    
-    var keys:[String] = []
-    var sections:[String: [Friends]] = [:]
-  
 }
 extension FriendsTableViewController: UITableViewDataSource, UITableViewDelegate {
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        keys
+        return keys
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -93,5 +114,11 @@ extension FriendsTableViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 100
+    }
+}
+extension FriendsTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filtereContentForSearchText(searchBar.text!)
     }
 }
