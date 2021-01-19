@@ -34,26 +34,15 @@ class FriendsTableViewController: UIViewController {
     }
     var keys:[String] = []
     var sections:[String: [Friends]] = [:]
-    func filtereContentForSearchText (_ searchText: String) {
-        filteredFriends = structOfFriend.filter { (friend: Friends) -> Bool in
-            return friend.name.lowercased().contains(searchText.lowercased())
-        }
-        FriendsTableView.reloadData()
-    }
-    @IBOutlet weak var FriendsTableView: UITableView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // нужно добавить сортировку отфильтрованного массива
-        FriendsTableView.delegate = self
-        FriendsTableView.dataSource = self
-        FriendsTableView.register(UINib(nibName: "cellConfig", bundle: nil), forCellReuseIdentifier: "cell")
-        
-        var arrayOfFriends: [Friends] = []
+    var arrayOfFriends: [Friends] = []
+    func checkFilter () {
+        arrayOfFriends = []
+        keys = []
+        sections = [:]
         if isFiltering {
-            arrayOfFriends.append(contentsOf: filteredFriends)
-            print (filteredFriends.count)
+            arrayOfFriends = filteredFriends
         } else {
-            arrayOfFriends.append(contentsOf: structOfFriend)
+            arrayOfFriends = structOfFriend
         }
         for i in arrayOfFriends {
             let firstLetter = String(i.name.first!)
@@ -64,6 +53,17 @@ class FriendsTableViewController: UIViewController {
             }
             keys = Array(sections.keys).sorted(by: <)
         }
+    }
+    @IBOutlet weak var FriendsTableView: UITableView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        FriendsTableView.delegate = self
+        FriendsTableView.dataSource = self
+        FriendsTableView.register(UINib(nibName: "cellConfig", bundle: nil), forCellReuseIdentifier: "cell")
+        
+        
+        checkFilter()
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "search"
@@ -72,23 +72,31 @@ class FriendsTableViewController: UIViewController {
     }
 }
 extension FriendsTableViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    
+    
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        checkFilter()
         return keys
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        checkFilter()
         return sections.count
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        checkFilter()
         return keys[section]
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        checkFilter()
         let key = keys[section]
         let count = sections[key]!.count
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        checkFilter()
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ReusableCell
         let key = keys[indexPath.section]
         let contact = sections[key]![indexPath.row]
@@ -102,6 +110,7 @@ extension FriendsTableViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        checkFilter()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(identifier: "PhotoVC") as! PhotoViewController
         let key = keys[indexPath.section]
@@ -114,6 +123,12 @@ extension FriendsTableViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 100
+    }
+    func filtereContentForSearchText (_ searchText: String) {
+        filteredFriends = structOfFriend.filter { (friend: Friends) -> Bool in
+            return friend.name.lowercased().contains(searchText.lowercased())
+        }
+        FriendsTableView.reloadData()
     }
 }
 extension FriendsTableViewController: UISearchResultsUpdating {
