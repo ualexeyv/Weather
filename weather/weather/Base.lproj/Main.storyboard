@@ -341,26 +341,27 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="iak-GH-QXt" customClass="PhotoCollectionCell" customModule="weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="chZ-bN-QmF" customClass="PhotoCollectionCell" customModule="weather" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-EH-uN1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJq-61-hqo" customClass="CustomView" customModule="weather" customModuleProvider="target">
+                                                    <rect key="frame" x="10" y="10" width="180" height="180"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="8hk-EH-uN1" firstAttribute="top" secondItem="chZ-bN-QmF" secondAttribute="top" id="EVY-4g-0qh"/>
-                                                <constraint firstItem="8hk-EH-uN1" firstAttribute="leading" secondItem="chZ-bN-QmF" secondAttribute="leading" id="cgU-bX-DI0"/>
-                                                <constraint firstAttribute="trailing" secondItem="8hk-EH-uN1" secondAttribute="trailing" id="ixR-Ip-sDg"/>
-                                                <constraint firstAttribute="bottom" secondItem="8hk-EH-uN1" secondAttribute="bottom" id="zRr-XA-A0h"/>
+                                                <constraint firstAttribute="trailing" secondItem="vJq-61-hqo" secondAttribute="trailing" constant="10" id="3q6-ox-6Bf"/>
+                                                <constraint firstItem="vJq-61-hqo" firstAttribute="top" secondItem="chZ-bN-QmF" secondAttribute="top" constant="10" id="Akm-JB-RoU"/>
+                                                <constraint firstAttribute="bottom" secondItem="vJq-61-hqo" secondAttribute="bottom" constant="10" id="CMX-e9-5qQ"/>
+                                                <constraint firstItem="vJq-61-hqo" firstAttribute="leading" secondItem="chZ-bN-QmF" secondAttribute="leading" constant="10" id="HUA-jE-Vvx"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="200" height="200"/>
                                         <connections>
-                                            <outlet property="friendPhoto" destination="8hk-EH-uN1" id="7sX-1f-Y50"/>
-                                            <outlet property="photoCollectionCell" destination="chZ-bN-QmF" id="ecn-ss-hrb"/>
+                                            <outlet property="photoView" destination="chZ-bN-QmF" id="1bv-dM-Quh"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

@@ -9,9 +9,11 @@ import UIKit
 
 class PhotoCollectionCell: UICollectionViewCell {
     
-    @IBOutlet weak var friendPhoto: UIImageView!
-    
+    @IBOutlet weak var photoView: CustomView!
+    var image: UIImageView? = nil
     func SetPhotoData (img: UIImage) {
-        friendPhoto.image = img
+        image = UIImageView (frame: self.bounds)
+        image?.image = img
+        self.addSubview(self.image!)
     }
 }

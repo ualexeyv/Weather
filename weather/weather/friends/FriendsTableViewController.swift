@@ -16,7 +16,7 @@ struct Friends {
 var structOfFriend : [Friends] = [
     Friends(name: "Максим", surname: "Иванов", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!]),
     Friends (name: "Андрей", surname: "Самойлов", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
-    Friends (name: "Антон", surname:  "Заболотный", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
+    Friends (name: "Антон", surname:  "Заболотный", avatar: UIImage(named: "zabol1_1")!, photos: [UIImage(named: "zabol1")!]),
     Friends (name: "Алексей", surname:  "Миранчук", avatar: UIImage(named: "miranchuk")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
     Friends (name: "Диньяр", surname:  "Билялетдинов", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
     Friends (name: "Кирилл", surname:  "Набабакин", avatar: UIImage(named: "friend2")!, photos: [UIImage(named: "friend1_1")!, UIImage(named: "friend1_2")!, UIImage(named: "friend1_3")!]),
