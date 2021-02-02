@@ -23,18 +23,18 @@ class PhotoViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionCell
-        print (indexPath.row)
         let photo = photoArray[indexPath.row]
         cell.SetPhotoData(img: photo)
         
         return cell
     }
     private func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = collectionView.frame.width
+        let size = collectionView.bounds.width
         if (size > 500) {
             return CGSize(width: (size/2) - 8, height: (size/2) - 8)
         }
-        return CGSize(width: size, height: size)
+        return CGSize(width: 200, height: 200)
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

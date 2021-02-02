@@ -58,6 +58,8 @@ class FriendsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+        
         FriendsTableView.delegate = self
         FriendsTableView.dataSource = self
         FriendsTableView.register(UINib(nibName: "cellConfig", bundle: nil), forCellReuseIdentifier: "cell")
